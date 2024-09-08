@@ -14,23 +14,68 @@ public class EnemySpawner : MonoBehaviour
 
     private GameObject player;
 
+    private float despawnDistance;
+
+    private List<GameObject> spawnEnemies = new List<GameObject>();
+
+    public int checkPerFrame = 10;
+    private int enemyToCheck;
+
     private void Start()
     {
         spawnCounter = timeToSpawn;
 
         player = GameObject.FindWithTag("Player");
+
+        despawnDistance = Vector3.Distance(transform.position, maxSpawnPoint) + 4f;
     }
 
     private void Update()
     {
+        if (player == null) return;
+
         spawnCounter -= Time.deltaTime;
         if (spawnCounter <= 0)
         {
             spawnCounter = timeToSpawn;
 
-            Instantiate(enemyTospawn, SelectSpawnPoint(), transform.rotation);
+            GameObject enemy = Instantiate(enemyTospawn, SelectSpawnPoint(), transform.rotation);
+
+            spawnEnemies.Add(enemy);
         }
 
+        int checkTarget = enemyToCheck + checkPerFrame;
+
+        while ( enemyToCheck < checkTarget)
+        {
+            if (enemyToCheck < spawnEnemies.Count)
+            {
+                if (spawnEnemies[enemyToCheck] != null)
+                {
+                    if(Vector3.Distance(transform.position, spawnEnemies[enemyToCheck].transform.position)> despawnDistance)
+                    {
+                        Destroy(spawnEnemies[enemyToCheck]);
+
+                        spawnEnemies.RemoveAt(enemyToCheck);
+                        checkTarget--;
+                    }
+                    else
+                    {
+                        enemyToCheck++;
+                    }
+                }
+                else
+                {
+                    spawnEnemies.RemoveAt(enemyToCheck);
+                    checkTarget--;
+                }
+            }
+            else
+            {
+                enemyToCheck = 0;
+                checkTarget = 0;
+            }
+        }
     }
 
     public Vector3 SelectSpawnPoint()

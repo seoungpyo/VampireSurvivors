@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if (target == null) return;
+
         rigidBody2D.velocity = (target.position - transform.position).normalized * moveSpeed;
 
         if (hitCounter > 0) hitCounter -= Time.deltaTime; 
