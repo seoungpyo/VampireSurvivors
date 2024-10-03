@@ -28,6 +28,7 @@ public class MovementByVelocity : MonoBehaviour
     private void MovementByVelocityEvent_OnMovementByVelocity(MovementByVelocityEvent movementByVelocityEvent, MovementByVelocityEventArgs movementByVelocityEventArgs)
     {
         MoveRigidBody(movementByVelocityEventArgs.moveDirection, movementByVelocityEventArgs.moveSpeed);
+
     }
 
     private void MoveRigidBody(Vector2 moveDirection, float moveSpeed)

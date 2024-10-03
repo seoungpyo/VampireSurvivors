@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerDetails_", menuName = "Scriptable Object/Player/PlayerDetails")]
 public class PlayerDetailsSO : ScriptableObject
 {
+    #region Header REFERENCE OBJECT;
+    [Space(10)]
+    [Header("PLAYER OBJECT")]
+    #endregion
+    public GameObject playerPrefab;
+
     #region Header MOVEMENT
     [Space(10)]
     [Header("MOVEMENT")]

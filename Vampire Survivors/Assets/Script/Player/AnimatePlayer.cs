@@ -5,24 +5,29 @@
 public class AnimatePlayer : MonoBehaviour
 {
     private Player player;
+    private MovementByVelocityEvent movementByVelocityEvent;
+    private IdleEvent idleEvent;
+
 
     private void Awake()
     {
         player = GetComponent<Player>();
+        movementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
+        idleEvent = GetComponent<IdleEvent>();
     }
 
     private void OnEnable()
     {
-        player.movementByVelocityEvent.OnMovementToVelocity += MovementByVelocityEvent_OnMovementByVelocity;
+        movementByVelocityEvent.OnMovementToVelocity += MovementByVelocityEvent_OnMovementByVelocity;
 
-        player.idleEvent.OnIdle += IdleEvent_OnIdle;
+        idleEvent.OnIdle += IdleEvent_OnIdle;
     }
 
     private void OnDisable()
     {
-        player.movementByVelocityEvent.OnMovementToVelocity -= MovementByVelocityEvent_OnMovementByVelocity;
+        movementByVelocityEvent.OnMovementToVelocity -= MovementByVelocityEvent_OnMovementByVelocity;
 
-        player.idleEvent.OnIdle -= IdleEvent_OnIdle;
+        idleEvent.OnIdle -= IdleEvent_OnIdle;
     }
 
     private void MovementByVelocityEvent_OnMovementByVelocity(MovementByVelocityEvent movementByVelocityEvent, MovementByVelocityEventArgs movementByVelocityEventArgs)
@@ -34,6 +39,5 @@ public class AnimatePlayer : MonoBehaviour
     {
         player.animator.SetBool("isMove", false);
     }
-
 }
 

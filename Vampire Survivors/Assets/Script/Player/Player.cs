@@ -10,10 +10,8 @@ using UnityEngine;
 [RequireComponent(typeof(MovementByVelocityEvent))]
 [RequireComponent(typeof(Idle))]
 [RequireComponent(typeof(IdleEvent))]
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Animator))]
 #endregion
 
 [DisallowMultipleComponent]
@@ -23,7 +21,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public int healthAmount;
     [HideInInspector] public float moveSpeed;
-    [HideInInspector] public Sprite sprite;
+    [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public HealthEvent healthEvent;
     [HideInInspector] public Health health;
     [HideInInspector] public PlayerController playerController;
@@ -40,12 +38,12 @@ public class Player : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         movementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
         idleEvent = GetComponent<IdleEvent>();
-        animator = GetComponent<Animator>();
-    }
+        animator = GetComponentInChildren<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        movementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
+        idleEvent = GetComponent<IdleEvent>();
 
-    private void Start()
-    {
-        
+        Initalize();
     }
 
     private void OnEnable()
@@ -58,10 +56,8 @@ public class Player : MonoBehaviour
         healthEvent.OnHealthChanged -= HealthEvent_OnHealthChanged;
     }
 
-    private void Initalize(PlayerDetailsSO playerDetails)
+    public void Initalize()
     {
-        this.playerDetails = playerDetails;
-
         SetPlayerHealth();
     }
 
@@ -71,7 +67,7 @@ public class Player : MonoBehaviour
 
         if(healthEvenArgs.currentHealth <= 0)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 

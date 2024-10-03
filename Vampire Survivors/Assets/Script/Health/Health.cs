@@ -26,15 +26,17 @@ public class Health : MonoBehaviour
 
         CallHealthChangedEvent(0);
     
-        if(enemy != null)
-        {
-
-        }
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
+
         CallHealthChangedEvent(damage);
     }
 
@@ -42,6 +44,12 @@ public class Health : MonoBehaviour
     {
         this.startingHealth = startingHealth;
         currentHealth = startingHealth;
+
+        if(healthBar != null)
+        {
+            healthBar.maxValue = currentHealth;
+            healthBar.value = currentHealth;
+        }
     }
 
     private void CallHealthChangedEvent(int damage)
