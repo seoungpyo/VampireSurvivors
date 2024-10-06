@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public MovementByVelocityEvent movementByVelocityEvent;
     [HideInInspector] public EnemyAnimation enemyAnimation;
 
-    public EnemyDetailsSO EnemyDetails;
+    public EnemyDetailsSO enemyDetails;
 
     private void Awake()
     {

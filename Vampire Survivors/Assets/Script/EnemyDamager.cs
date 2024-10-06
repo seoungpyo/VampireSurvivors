@@ -11,6 +11,7 @@ public class EnemyDamager : MonoBehaviour
     private Vector3 targetSize;
 
     public bool shouldKnockBack;
+    public bool destroyParent;
 
     private void Start()
     {
@@ -33,6 +34,11 @@ public class EnemyDamager : MonoBehaviour
             if(transform.localScale.x == 0)
             {
                 Destroy(gameObject);
+
+                if (destroyParent)
+                {
+                    Destroy(transform.parent.gameObject);
+                }
             }
         }
     }

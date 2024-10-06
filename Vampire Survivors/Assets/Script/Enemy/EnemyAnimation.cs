@@ -40,12 +40,12 @@ public class EnemyAnimation : MonoBehaviour
 
     private void Initalize()
     {
-        maxSize = enemy.EnemyDetails.maxAnimationSize;
-        minSize = enemy.EnemyDetails.minAnimationSize;
+        maxSize = enemy.enemyDetails.maxAnimationSize;
+        minSize = enemy.enemyDetails.minAnimationSize;
 
         activeSize = maxSize;
 
-        speed *= Random.Range(enemy.EnemyDetails.minAnimationSpeed, enemy.EnemyDetails.maxAnimationSpeed);
+        speed *= enemy.enemyDetails.animationSpeed;
     }
 
 }

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39344bcbd76d66d46900b00700e8ac2c, type: 3}
-  m_Name: EnemyDetailsSO_
+  m_Name: EnemyDetailsSO_GreenBee
   m_EditorClassIdentifier: 
-  enemyPreFab: {fileID: 0}
-  enemySprite: {fileID: 0}
-  moveSpeed: 3
-  hitCount: 1
-  maxDamage: 4
-  minDamage: 6
-  maxAnimationSize: 0.75
-  minAnimationSize: 1.25
-  maxAnimationSpeed: 0.5
-  minAnimationSpeed: 1.5
+  enemyName: Green Bee
+  moveSpeed: 1
+  hitWaitTime: 1
+  knockBackTime: 0.5
+  maxDamage: 2
+  minDamage: 5
+  health: 10
+  maxAnimationSize: 0.9
+  minAnimationSize: 1.1
+  animationSpeed: 0.5

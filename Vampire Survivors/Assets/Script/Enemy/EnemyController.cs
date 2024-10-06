@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float moveSpeed = 3f;
     private Rigidbody2D rigidBody2D;
     private Transform target;
-    private int damage = 5;
-
-    public float hitWaitTime = 1f;
-    private float hitTime;
     private Enemy enemy;
 
-    public float health = 5f;
+    private float moveSpeed;
+    private float health;
+    private float hitWaitTime;
+    private float hitTime;
 
-    public float knockBackTime = 0.5f;
+    private float knockBackTime;
     private float knockBackCounter;
 
     private MovementByVelocityEvent movementByVelocityEvent;
     private EnemyAnimation enemyAnimation;
 
+
     private void Awake()
     {
+        enemy = GetComponent<Enemy>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         movementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
         enemyAnimation = GetComponent<EnemyAnimation>();
 
         target = GameManager.Instance.player.transform;
+
+        Initialize(enemy.enemyDetails);
     }
 
     private void Update()
@@ -68,11 +70,16 @@ public class EnemyController : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Health>() != null)
             {
-                collision.gameObject.GetComponent<Health>().TakeDamage(damage);
+                collision.gameObject.GetComponent<Health>().TakeDamage(GetAttackDamage(enemy.enemyDetails));
 
                 hitTime = Time.time;
             }
         }
+    }
+
+    public int GetAttackDamage(EnemyDetailsSO enemyDetails)
+    {
+        return Random.Range(enemyDetails.minDamage, enemyDetails.maxDamage);
     }
 
     public void TakeDamage(float damageToTake)
@@ -83,6 +90,8 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DamageNumberController.instance.SpawnDamage(damageToTake, transform.position);
     }
 
     public void TakeDamage(float damageToTake, bool shouldKnockBack)
@@ -93,5 +102,13 @@ public class EnemyController : MonoBehaviour
         {
             knockBackCounter = knockBackTime;
         }
+    }
+
+    public void Initialize(EnemyDetailsSO enemyDetails)
+    {
+        moveSpeed = enemyDetails.moveSpeed;
+        health = enemyDetails.health;
+        hitWaitTime = enemyDetails.hitWaitTime;
+        knockBackTime = enemyDetails.knockBackTime;
     }
 }
