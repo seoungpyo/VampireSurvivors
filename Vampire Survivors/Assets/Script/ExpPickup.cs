@@ -11,6 +11,7 @@ public class ExpPickup : MonoBehaviour
     private float checkCounter;
 
     private bool movingToPlayer = false;
+    
     private Player player;
 
     private void Awake()

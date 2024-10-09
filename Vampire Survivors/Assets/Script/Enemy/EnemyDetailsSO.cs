@@ -38,4 +38,10 @@ public class EnemyDetailsSO : ScriptableObject
     public float maxAnimationSize;
     public float minAnimationSize;
     public float animationSpeed = 0.5f;
+
+    #region Header OTHERS INFO
+    [Space(10)]
+    [Header("OTHERS")]
+    #endregion
+    public int expValue = 1;
 }

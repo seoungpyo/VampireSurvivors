@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinWeapon : MonoBehaviour
+public class SpinWeapon : Weapon
 {
     public float rotateSpeed;
 

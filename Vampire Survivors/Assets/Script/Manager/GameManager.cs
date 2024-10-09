@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : SingletonMonobehavior<GameManager>
 {
 
-    public Player player; 
+    [HideInInspector] public Player player; 
 
     protected override void Awake()
     {

@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
     private float knockBackTime;
     private float knockBackCounter;
 
+    public int expToGive;
+
     private MovementByVelocityEvent movementByVelocityEvent;
     private EnemyAnimation enemyAnimation;
 
@@ -89,6 +91,8 @@ public class EnemyController : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+
+            ExperienveLevelController.Instance.SpawnExp(transform.position, expToGive);
         }
 
         DamageNumberController.instance.SpawnDamage(damageToTake, transform.position);
@@ -110,5 +114,6 @@ public class EnemyController : MonoBehaviour
         health = enemyDetails.health;
         hitWaitTime = enemyDetails.hitWaitTime;
         knockBackTime = enemyDetails.knockBackTime;
+        expToGive = enemyDetails.expValue;
     }
 }

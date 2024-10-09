@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Blue Wolf
   moveSpeed: 1.1
-  hitCount: 1
+  hitWaitTime: 1
   knockBackTime: 0.5
   maxDamage: 5
   minDamage: 10
@@ -22,3 +22,4 @@ MonoBehaviour:
   maxAnimationSize: 0.9
   minAnimationSize: 1.1
   animationSpeed: 0.5
+  expValue: 2

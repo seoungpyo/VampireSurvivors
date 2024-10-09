@@ -22,3 +22,4 @@ MonoBehaviour:
   maxAnimationSize: 0.9
   minAnimationSize: 1.1
   animationSpeed: 0.5
+  expValue: 6
