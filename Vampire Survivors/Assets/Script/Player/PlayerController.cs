@@ -6,11 +6,18 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
+    public Weapon activeWeapon;
+
     private Player player;
     private float moveSpeed;
 
     private void Awake()
     {
+
+        instance = this;
+
         player = GetComponent<Player>();
 
         moveSpeed = player.playerDetails.moveSpeed;

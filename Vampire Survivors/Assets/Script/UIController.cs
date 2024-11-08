@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : SingletonMonobehavior<UIController>
 {
     public Slider expLevelSlider;
     public TMP_Text expLevelText;
+
+    public LevelUpSelectionButton[] levelUpButtons;
+    public GameObject levelUpPanel;
 
     protected override void Awake()
     {

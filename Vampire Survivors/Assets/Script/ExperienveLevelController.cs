@@ -50,5 +50,13 @@ public class ExperienveLevelController : SingletonMonobehavior<ExperienveLevelCo
         {
             currentLevel = expLevels.Count - 1;
         }
+
+        //PlayerController.instance.activeWeapon.LevelUp();
+
+        UIController.Instance.levelUpPanel.SetActive(true);
+
+        Time.timeScale = 0f;
+
+        UIController.Instance.levelUpButtons[0].UpdateButtonDisplay(PlayerController.instance.activeWeapon);
     }
 }
