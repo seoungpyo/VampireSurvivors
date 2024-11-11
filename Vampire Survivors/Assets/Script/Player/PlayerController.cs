@@ -8,10 +8,15 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
-    public Weapon activeWeapon;
+    public List<Weapon> unassignedWeapons;
+    public List<Weapon> assignedWeapons;
 
     private Player player;
     private float moveSpeed;
+
+    public int maxWeapons = 3;
+
+    [HideInInspector] public List<Weapon> fullyLevelledWeapon = new List<Weapon>();
 
     private void Awake()
     {
@@ -21,6 +26,11 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<Player>();
 
         moveSpeed = player.playerDetails.moveSpeed;
+    }
+
+    private void Start()
+    {
+        AddWeapon(Random.Range(0, assignedWeapons.Count));
     }
 
     private void Update()
@@ -46,5 +56,25 @@ public class PlayerController : MonoBehaviour
         {
             player.idleEvent.CallIdleEvent();
         }
+    }
+
+    public void AddWeapon(int weaponNumber)
+    {
+        if(weaponNumber < unassignedWeapons.Count)
+        {
+            assignedWeapons.Add(unassignedWeapons[weaponNumber]);
+
+            unassignedWeapons[weaponNumber].gameObject.SetActive(true);
+            unassignedWeapons.RemoveAt(weaponNumber);
+        }
+    }
+    
+    public void AddWeapon(Weapon weaponToAdd)
+    {
+        weaponToAdd.gameObject.SetActive(true);
+
+        assignedWeapons.Add(weaponToAdd);
+
+        unassignedWeapons.Remove(weaponToAdd);
     }
 }

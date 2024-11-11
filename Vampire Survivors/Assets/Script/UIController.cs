@@ -24,4 +24,10 @@ public class UIController : SingletonMonobehavior<UIController>
 
         expLevelText.text = "LEVEL : " + currentLevel.ToString();
     }
+
+    public void SkipLevelUp()
+    {
+        levelUpPanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
 }
