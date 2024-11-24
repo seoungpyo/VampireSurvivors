@@ -44,4 +44,6 @@ public class EnemyDetailsSO : ScriptableObject
     [Header("OTHERS")]
     #endregion
     public int expValue = 1;
+    public int coinValue = 1;
+    public float coinDropRate = 0.5f;
 }

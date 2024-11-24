@@ -32,7 +32,12 @@ public class SpinWeapon : Weapon
         {
             spawnCounter = timeBetweenSpawn;
 
-            Instantiate(fireballToSpawn, fireballToSpawn.position, fireballToSpawn.rotation, holder).gameObject.SetActive(true);
+            for (int i = 0; i < state[weaponLevel].amount; i++)
+            {
+                float rot = (360f/state[weaponLevel].amount) * i;
+
+                Instantiate(fireballToSpawn, fireballToSpawn.position, Quaternion.Euler(0, 0, rot), holder).gameObject.SetActive(true);
+            }
         }
 
         if(stateUpdated)

@@ -36,6 +36,12 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if (target == null)
+        {
+            rigidBody2D.velocity = Vector2.zero;
+            return;
+        }
+
         if(knockBackCounter > 0)
         {
             knockBackCounter -= Time.deltaTime;
@@ -93,6 +99,11 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
 
             ExperienveLevelController.Instance.SpawnExp(transform.position, expToGive);
+
+            if(Random.value <= enemy.enemyDetails.coinDropRate)
+            {
+                CoinController.Instance.DropCoin(transform.position, enemy.enemyDetails.coinValue);
+            }
         }
 
         DamageNumberController.instance.SpawnDamage(damageToTake, transform.position);

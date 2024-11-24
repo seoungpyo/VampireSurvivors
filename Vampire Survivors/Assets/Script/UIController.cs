@@ -8,6 +8,7 @@ public class UIController : SingletonMonobehavior<UIController>
 {
     public Slider expLevelSlider;
     public TMP_Text expLevelText;
+    public TMP_Text coinText;
 
     public LevelUpSelectionButton[] levelUpButtons;
     public GameObject levelUpPanel;
@@ -29,5 +30,10 @@ public class UIController : SingletonMonobehavior<UIController>
     {
         levelUpPanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void UpdateCoins()
+    {
+        coinText.text = "COins: " + CoinController.Instance.currentCoins;
     }
 }
