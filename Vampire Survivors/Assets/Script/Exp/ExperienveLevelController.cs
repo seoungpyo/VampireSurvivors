@@ -35,6 +35,8 @@ public class ExperienveLevelController : SingletonMonobehavior<ExperienveLevelCo
         }
 
         UIController.Instance.UpdateExperience(currentExperience, expLevels[currentLevel], currentLevel);
+
+        SFXManager.Instance.PlaySFXPitched(2);
     }
 
     public void SpawnExp(Vector3 position, int expValue)
@@ -102,5 +104,7 @@ public class ExperienveLevelController : SingletonMonobehavior<ExperienveLevelCo
                 UIController.Instance.levelUpButtons[i].gameObject.SetActive(false);
             }
         }
+
+        PlayerStatController.Instance.UpgradeDisplay();
     }
 }

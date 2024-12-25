@@ -12,9 +12,10 @@ public class PlayerController : MonoBehaviour
     public List<Weapon> assignedWeapons;
 
     private Player player;
-    private float moveSpeed;
+    public float moveSpeed;
 
     public int maxWeapons = 3;
+    public float pickupRange = 2f;
 
     [HideInInspector] public List<Weapon> fullyLevelledWeapon = new List<Weapon>();
 
@@ -26,12 +27,16 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<Player>();
 
         moveSpeed = player.playerDetails.moveSpeed;
+
+        //moveSpeed = PlayerStatController.Instance.moveSpeed[0].value;
+        //pickupRange = PlayerStatController.Instance.pickupRange[0].value;
     }
 
     private void Start()
     {
         if(assignedWeapons.Count == 0)
-        AddWeapon(Random.Range(0, assignedWeapons.Count));
+        AddWeapon(Random.Range(0, unassignedWeapons.Count));
+
     }
 
     private void Update()

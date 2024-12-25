@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinPickUp : MonoBehaviour
+public class ExpPickup : MonoBehaviour
 {
-    public int coinAmount = 1;
+    public int expValue;
     public float moveSpeed;
 
-    private bool movingToPlayer = false;
-
-    public float timeBetwwenChecks = 0.2f;
+    public float timeBetweenChecks = 0.2f;
     private float checkCounter;
 
+    private bool movingToPlayer = false;
+    
     private Player player;
 
     private void Awake()
@@ -23,17 +23,17 @@ public class CoinPickUp : MonoBehaviour
     {
         if (movingToPlayer)
         {
-            transform.position = Vector3.MoveTowards(transform.position,
+            transform.position = Vector3.MoveTowards(transform.position, 
                 player.transform.position, moveSpeed * Time.deltaTime);
         }
         else
         {
             checkCounter -= Time.deltaTime;
-            if (checkCounter <= 0)
+            if(checkCounter <= 0)
             {
-                checkCounter = timeBetwwenChecks;
+                checkCounter = timeBetweenChecks;
 
-                if (Vector3.Distance(transform.position, player.transform.position) < Settings.pickUpRange)
+                if(Vector3.Distance(transform.position, player.transform.position)< PlayerController.instance.pickupRange)
                 {
                     movingToPlayer = true;
                     moveSpeed += player.moveSpeed;
@@ -44,9 +44,10 @@ public class CoinPickUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if(collision.tag == "Player")
         {
-            CoinController.Instance.AddCoins(coinAmount);
+            ExperienveLevelController.Instance.GetExp(expValue);
+
             Destroy(gameObject);
         }
     }

@@ -68,11 +68,18 @@ public class Player : MonoBehaviour
         if(healthEvenArgs.currentHealth <= 0)
         {
             Destroy(gameObject);
+
+            LevelManager.Instance.EndLevel();
+
+            health.PlayDeathEffect();
+
+            SFXManager.Instance.PlaySFX(3);
         }
     }
 
     private void SetPlayerHealth()
     {
         health.SetStartingHealth(playerDetails.HealthAmount);
+        //health.SetStartingHealth(Mathf.RoundToInt(PlayerStatController.Instance.health[0].value));
     }
 }

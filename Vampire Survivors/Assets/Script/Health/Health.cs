@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
+    [SerializeField] private GameObject deathEffect;
 
     private int startingHealth;
     private int currentHealth;
@@ -52,8 +53,31 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void UpgradeHealthAmount(int newHealthAmount, int oldHealthAmount)
+    {
+        this.startingHealth = newHealthAmount;
+        currentHealth += newHealthAmount - oldHealthAmount;
+
+        if (healthBar != null)
+        {
+            healthBar.maxValue = newHealthAmount;
+            healthBar.value = currentHealth;
+
+            Debug.Log("a" + healthBar.maxValue);
+            Debug.Log("b" + healthBar.value);
+
+        }
+
+        CallHealthChangedEvent(0);
+    }
+
     private void CallHealthChangedEvent(int damage)
     {
         healthEvent.CallHealthChangedEvent(currentHealth, damage);
+    }
+
+    public void PlayDeathEffect()
+    {
+        Instantiate(deathEffect, transform.position, transform.rotation);
     }
 }

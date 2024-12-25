@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinController : SingletonMonobehavior<CoinController>
@@ -18,6 +16,9 @@ public class CoinController : SingletonMonobehavior<CoinController>
         currentCoins += coinsToAdd;
 
         UIController.Instance.UpdateCoins();
+
+        SFXManager.Instance.PlaySFXPitched(2);
+        
     }
 
     public void DropCoin(Vector3 position, int value)
@@ -25,6 +26,13 @@ public class CoinController : SingletonMonobehavior<CoinController>
         CoinPickUp newCoin = Instantiate(coin, position + new Vector3(0.2f, 0.1f, 0f), Quaternion.identity);
         newCoin.coinAmount = value;
         newCoin.gameObject.SetActive(true);
+    }
+
+    public void SpendCoins(int coinsToSpend)
+    {
+        currentCoins -= coinsToSpend;
+
+        UIController.Instance.UpdateCoins();
     }
 
 }

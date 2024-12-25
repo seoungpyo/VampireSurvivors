@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ExpPickup : MonoBehaviour
+public class CoinPickUp : MonoBehaviour
 {
-    public int expValue;
+    public int coinAmount = 1;
     public float moveSpeed;
 
-    public float timeBetwwenChecks = 0.2f;
+    private bool movingToPlayer = false;
+    public float timeBetweenChecks = 0.2f;
     private float checkCounter;
 
-    private bool movingToPlayer = false;
-    
     private Player player;
 
     private void Awake()
@@ -19,21 +17,21 @@ public class ExpPickup : MonoBehaviour
         player = GameManager.Instance.player;
     }
 
-    private void Update()
+    private void Update()   
     {
         if (movingToPlayer)
         {
-            transform.position = Vector3.MoveTowards(transform.position, 
+            transform.position = Vector3.MoveTowards(transform.position,
                 player.transform.position, moveSpeed * Time.deltaTime);
         }
         else
         {
             checkCounter -= Time.deltaTime;
-            if(checkCounter <= 0)
+            if (checkCounter <= 0)
             {
-                checkCounter = timeBetwwenChecks;
+                checkCounter = timeBetweenChecks;
 
-                if(Vector3.Distance(transform.position, player.transform.position)< Settings.pickUpRange)
+                if (Vector3.Distance(transform.position, player.transform.position) < PlayerController.instance.pickupRange)
                 {
                     movingToPlayer = true;
                     moveSpeed += player.moveSpeed;
@@ -44,10 +42,9 @@ public class ExpPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
-            ExperienveLevelController.Instance.GetExp(expValue);
-
+            CoinController.Instance.AddCoins(coinAmount);
             Destroy(gameObject);
         }
     }
